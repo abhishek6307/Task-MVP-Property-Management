@@ -41,7 +41,11 @@ class HomeController extends Controller
             $sortDirection = $request->input('sort_direction', 'asc');
             $query->orderBy($sortBy, $sortDirection);
         }
-        $favoriteCount = auth()->user()->favoriteCount();
+        if (auth()->check()) {
+            $favoriteCount = auth()->user()->favoriteCount();
+        } else {
+            $favoriteCount = 0;
+        }
         $properties = $query->paginate(9);
         return view('home', compact('properties', 'favoriteCount'));
     }
