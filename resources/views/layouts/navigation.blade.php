@@ -10,9 +10,14 @@
             @auth
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('favorites.index') }}">
-                <i class="fas text-danger fa-heart"></i> <span class="badge badge-primary favorite-count">{{ $favoriteCount }}</span>
+                @if (Route::currentRouteName() == 'home')
+                <li>
+                    <a href="#">
+                        <i class="fas text-danger fa-heart"></i>
+                        <span class="badge badge-primary favorite-count">{{ $favoriteCount }}</span>
                     </a>
                 </li>
+            @endif
                 @role('admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
